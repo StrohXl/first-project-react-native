@@ -1,45 +1,41 @@
-import {
-  ScrollView,
-  Text,
-  View,
-  FlatList,
-  ActivityIndicator,
-} from "react-native";
+import { Text, View, FlatList, ActivityIndicator } from "react-native";
 import { useEffect, useState } from "react";
 import { getAllAnimes } from "../libs/metacritic";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import CardAnime from "./CardAnime";
+import { AnimatedAnimeCard } from "./CardAnime";
+import { Link } from "expo-router";
+import LoadingActivity from "./LoadingActivity";
 
 export default function Main() {
-  const [games, setGames] = useState([]);
-  const insets = useSafeAreaInsets();
+  const [animes, setAnimes] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getAllAnimes().then((data) => {
-      setGames(data);
-    });
+    getAllAnimes()
+      .then((data) => {
+        setAnimes(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   }, []);
   return (
-    <View style={{ paddingTop: insets.top, paddingBottom: insets.bottom + 5 }}>
-      <Text
-        style={{
-          color: "#fff",
-          textAlign: "center",
-          fontSize: 30,
-          marginBottom: 10,
-        }}
-      >
-        Mi primera pagina
-      </Text>
-      {games.length === 0 ? (
-        <ActivityIndicator color={"#fff"} />
+    <View className="">
+      {loading ? (
+        <LoadingActivity />
+      ) : animes.length === 0 ? (
+        <View>
+          <Text style={{ color: "#fff" }}>No se encontro ningun anime</Text>
+        </View>
       ) : (
         <FlatList
-          data={games}
-          renderItem={(game) => (
-            <Text style={{ color: "#fff" }}>{game.title}</Text>
+          data={animes}
+          style={{ paddingTop: 10 }}
+          renderItem={({ item, index }) => (
+            <AnimatedAnimeCard anime={item} index={index} />
           )}
-        ></FlatList>
+          keyExtractor={(item) => item.id}
+        />
       )}
     </View>
   );
