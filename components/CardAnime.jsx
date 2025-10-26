@@ -9,7 +9,7 @@ export default function CardAnime({ anime }) {
       <Pressable>
         {({ pressed }) => (
           <View
-            className={`${pressed ? "bg-gray-600" : "bg-gray-700"} p-4 rounded-xl mb-4 flex-row gap-4`}
+            className={`${pressed ? "bg-gray-900/80" : "bg-gray-950"} p-4 rounded-xl mb-4 flex-row gap-4`}
           >
             <Image
               source={{ uri: anime.images.large }}
@@ -17,11 +17,11 @@ export default function CardAnime({ anime }) {
               className="rounded-md"
             />
             <View className="flex-shrink">
-              <Text className="text-white text-2xl font-bold mb-[14px] line-clamp-1">
+              <Text className="text-white text-2xl font-bold mb-3 line-clamp-1">
                 {anime.title}
               </Text>
               <Score score={anime.score} />
-              <Text className="text-white line-clamp-4 mt-[14px]">
+              <Text className="text-white line-clamp-4 mt-3">
                 {anime.synopsis}
               </Text>
             </View>

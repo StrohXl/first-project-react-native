@@ -23,27 +23,23 @@ export default function IdAnime() {
   }, []);
   return (
     <>
-      <StatusBar style="auto" />
       <Stack.Screen
         options={{
           headerLeft: () => {},
           headerRight: () => {},
-          headerTitle: `${anime ? anime.title : ""}`,
+          headerTitle: `${anime ? anime.title.slice(0, 30) : ""}${anime && anime.title.length > 30 ? "..." : ""}`,
           headerTitleAlign: "center",
           headerTitleStyle: {
-            color: "#000",
+            color: "#fff",
             fontSize: 18,
             fontWeight: "700",
-          },
-          headerStyle: {
-            backgroundColor: "#ffdd00",
           },
         }}
       />
       {loading ? (
         <LoadingActivity />
       ) : anime ? (
-        <ScrollView>
+        <ScrollView style={{ paddingInline: 15 }}>
           <Screen>
             <Image
               source={{ uri: anime.images.large }}

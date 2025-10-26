@@ -2,7 +2,6 @@ import { Text, View, FlatList, ActivityIndicator } from "react-native";
 import { useEffect, useState } from "react";
 import { getAllAnimes } from "../libs/metacritic";
 import { AnimatedAnimeCard } from "./CardAnime";
-import { Link } from "expo-router";
 import LoadingActivity from "./LoadingActivity";
 
 export default function Main() {
@@ -30,7 +29,7 @@ export default function Main() {
       ) : (
         <FlatList
           data={animes}
-          style={{ paddingTop: 10 }}
+          style={{ paddingTop: 10, paddingInline: 15 }}
           renderItem={({ item, index }) => (
             <AnimatedAnimeCard anime={item} index={index} />
           )}

@@ -6,5 +6,9 @@ export const ChevronLeft = (props) => {
 };
 
 export const CircleInfo = (props) => {
-  return <FontAwesome6 name="circle-info" size={24} color="white" {...props} />;
+  return <FontAwesome6 name="info" size={24} color="white" {...props} />;
+};
+
+export const Search = () => {
+  return <FontAwesome6 name="magnifying-glass" size={24} color="white" />;
 };
